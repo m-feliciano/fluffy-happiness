@@ -24,7 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring-cloud.version>2022.0.1</spring-cloud.version>
+        <spring-cloud.version>2022.0.4</spring-cloud.version>
         <spring.boot.maven.plugin.version>3.0.2</spring.boot.maven.plugin.version>
         <spring.boot.dependencies.version>3.0.2</spring.boot.dependencies.version>
         <micrometer-tracing.version>1.2.0</micrometer-tracing.version>
@@ -76,6 +76,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
