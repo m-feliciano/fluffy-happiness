@@ -1,0 +1,18 @@
+### Get All Users
+GET http://${{host}}/costumers
+Accept: application/json
+Authorization: {{BearerToken}}
+
+# Redirect to
+>> data-costumer.json
+
+### Create New User
+POST http://{{host}}/costumers
+Accept: application/json
+Content-Type: application/json
+
+{
+  "firstname":"user2",
+  "lastname": "lastname2",
+  "email": "email2@email.com"
+}

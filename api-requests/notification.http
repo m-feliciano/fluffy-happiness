@@ -1,0 +1,20 @@
+### Get All Notifications
+GET http://${{host}}/notification
+Accept: application/json
+Authorization: {{BearerToken}}
+
+# Redirect to
+#>> data-costumer.json
+
+### Create New Notification
+POST http://{{host}}/notification
+Accept: application/json
+Content-Type: application/json
+
+{
+  "fromSenderId": "1",
+  "fromSenderEmail": "email@email.com",
+  "toCostumerId": "2",
+  "toCostumerEmail": "email2@email.com",
+  "message": "Hello World!!!"
+}

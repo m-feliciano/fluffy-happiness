@@ -1,0 +1,7 @@
+### Check For Fraud
+GET http://${{host}}/fraud-check/2
+Accept: application/json
+Authorization: {{BearerToken}}
+
+# Redirect to
+>> data-fraud.json
