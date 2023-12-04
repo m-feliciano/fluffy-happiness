@@ -24,7 +24,7 @@ public class Notification {
     private Long id;
 
     @Column(name = "to_costumer_id")
-    private Integer toCustomerId;
+    private Long toCustomerId;
 
     @Column(name = "to_customer_email")
     private String toCustomerEmail;

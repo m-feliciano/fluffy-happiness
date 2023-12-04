@@ -1,5 +1,8 @@
 package br.com.microservices.costumer;
 
+import br.com.microservices.costumer.transfer.CostumerDto;
+import br.com.microservices.costumer.transfer.CostumerMapper;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -9,14 +12,11 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@AllArgsConstructor
 @RequestMapping("api/v1/costumers")
 public class CostumerController {
 
     private final CostumerService costumerService;
-
-    public CostumerController(CostumerService costumerService) {
-        this.costumerService = costumerService;
-    }
 
     @PostMapping
     public ResponseEntity<CostumerDto> register(@RequestBody @Validated CostumerDto costumerDto) {
@@ -27,10 +27,9 @@ public class CostumerController {
 
     @GetMapping
     public ResponseEntity<List<CostumerDto>> findAll() {
-        List<Costumer> costumers = costumerService.findAll();
-        List<CostumerDto> costumersDto = costumers.stream()
-                .map(c -> new CostumerDto(c.getFirstname(), c.getLastname(), c.getEmail()))
+        List<CostumerDto> dtos = costumerService.findAll().stream()
+                .map(CostumerMapper::toDto)
                 .toList();
-        return ResponseEntity.ok().body(costumersDto);
+        return ResponseEntity.ok().body(dtos);
     }
 }

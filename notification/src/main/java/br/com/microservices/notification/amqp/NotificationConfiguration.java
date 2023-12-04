@@ -1,4 +1,4 @@
-package br.com.microservices.notification;
+package br.com.microservices.notification.amqp;
 
 import lombok.Getter;
 import org.springframework.amqp.core.Binding;

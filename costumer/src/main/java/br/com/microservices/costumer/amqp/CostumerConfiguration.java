@@ -1,4 +1,4 @@
-package br.com.microservices.costumer;
+package br.com.microservices.costumer.amqp;
 
 import lombok.Getter;
 import org.springframework.amqp.core.Binding;

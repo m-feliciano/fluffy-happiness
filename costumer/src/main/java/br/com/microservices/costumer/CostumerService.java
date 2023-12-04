@@ -4,6 +4,7 @@ import br.com.microservices.amqp.RabbitMQMessageProducer;
 import br.com.microservices.clients.fraud.FraudCheckResponse;
 import br.com.microservices.clients.fraud.IFraudClient;
 import br.com.microservices.clients.notification.NotificationRequest;
+import br.com.microservices.costumer.transfer.CostumerDto;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang.BooleanUtils;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class CostumerService {
         var notificationRequest = NotificationRequest.builder()
                 .toCostumerEmail(costumer.getEmail())
                 .toCostumerId(costumer.getId())
-                .message("Hi %s, welcome to...etc".formatted(costumer.getFirstname()))
+                .message("Hi %s!%n Welcome to...etc".formatted(costumer.getFirstname()))
                 .build();
         mqMessageProducer.publish(notificationRequest, "", "");
     }
