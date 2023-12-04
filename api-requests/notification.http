@@ -1,7 +1,7 @@
 ### Get All Notifications
 GET http://${{host}}/notification
 Accept: application/json
-Authorization: {{BearerToken}}
+#Authorization: {{BearerToken}}
 
 # Redirect to
 #>> data-costumer.json

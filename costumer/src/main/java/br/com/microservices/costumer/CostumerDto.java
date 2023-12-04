@@ -13,6 +13,6 @@ import java.io.Serializable;
  */
 @Builder
 public record CostumerDto(@NotNull @Size(min = 3) String firstname,
-                          @NotNull @Size(min = 3) String lastname,
+                          String lastname,
                           @NotNull @Email String email) implements Serializable {
 }
