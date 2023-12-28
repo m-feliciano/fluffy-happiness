@@ -1,7 +1,7 @@
 ### Check For Fraud
-GET http://${{host}}/fraud-check/2
+GET https://jsonplaceholder.typicode.com/todos/1
 Accept: application/json
-Authorization: {{BearerToken}}
+#Authorization: {{BearerToken}}
 
 # Redirect to
->> data-fraud.json
+#>> data-fraud.json

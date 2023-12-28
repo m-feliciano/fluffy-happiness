@@ -1,3 +1,21 @@
+### Create New Notification
+POST http://{{host}}/notification
+Accept: application/json
+Content-Type: application/json
+
+{
+  "toCostumerId": "1",
+  "toCostumerEmail": "{{$random.email}}",
+  "message": "{{$random.alphabetic(20)}}"
+}
+
+> {%
+    client.test('POST new notification returns 201', function () {
+        client.assert(response.status === 201);
+        // TODO: Testing
+    });
+%}
+
 ### Get All Notifications
 GET http://${{host}}/notification
 Accept: application/json
@@ -5,16 +23,3 @@ Accept: application/json
 
 # Redirect to
 #>> data-costumer.json
-
-### Create New Notification
-POST http://{{host}}/notification
-Accept: application/json
-Content-Type: application/json
-
-{
-  "fromSenderId": "1",
-  "fromSenderEmail": "email@email.com",
-  "toCostumerId": "2",
-  "toCostumerEmail": "email2@email.com",
-  "message": "Hello World!!!"
-}

@@ -4,15 +4,27 @@ Accept: application/json
 #Authorization: {{BearerToken}}
 
 # Redirect to
->> data-costumer.json
+#>> data-costumer.json
 
-### Create New User
+### Create New Costumer
+#< {%
+#    pre-request config
+#    request.variables.set("key", "value");
+#    POST path/param?{{key}}
+#%}
 POST http://{{host}}/costumers
 Accept: application/json
 Content-Type: application/json
 
 {
-  "firstname": "user2",
-  "lastname": "lastname2",
-  "email": "email20@email.com"
+  "firstname": "{{$random.alphabetic(8)}}",
+  "lastname": "{{$random.alphabetic(8)}}",
+  "email": "{{$random.email}}"
 }
+
+> {%
+    client.test('POST new costumer returns 201', function () {
+        client.assert(response.status === 201);
+        // TODO: Testing
+    });
+%}
