@@ -28,14 +28,14 @@ public class NotificationConfiguration {
     }
 
     @Bean
-    public Queue notificationQueue() {
+    public Queue queue() {
         return new Queue(this.notificationQueue);
     }
 
     @Bean
     public Binding internalNotificationBinding() {
         return BindingBuilder
-                .bind(notificationQueue())
+                .bind(queue())
                 .to(internalTopicExchange())
                 .with(this.internalNotificationRoutingKey);
     }

@@ -21,7 +21,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
     fetch-registry: true
     register-with-eureka: true
 
@@ -46,4 +46,4 @@ management:
       type: b3
   zipkin:
     tracing:
-      endpoint: localhost:9411/api/v2/spans
+      endpoint: http://localhost:9411/api/v2/spans

@@ -17,7 +17,7 @@ public class RabbitConfiguration {
 
     @Bean
     public ConnectionFactory connectionFactory() {
-        return new CachingConnectionFactory();
+        return new CachingConnectionFactory("localhost");
     }
 
     @Bean
@@ -29,7 +29,7 @@ public class RabbitConfiguration {
     }
 
     @Bean
-    public AmqpTemplate amqpTemplat() {
+    public AmqpTemplate amqpTemplate() {
         var template = new RabbitTemplate(connectionFactory());
         template.setMessageConverter(jackson2JsonMessageConverter());
         return template;

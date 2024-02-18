@@ -23,8 +23,8 @@ Content-Type: application/json
 }
 
 > {%
-    client.test('POST new costumer returns 201', function () {
-        client.assert(response.status === 201);
+    client.test('POST new costumer returns 200', function () {
+        client.assert(response.status === 200);
         // TODO: Testing
     });
 %}

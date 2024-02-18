@@ -36,12 +36,12 @@ public class CostumerService {
             throw new IllegalStateException("Fraudster detected");
         }
 
-        var notificationRequest = NotificationRequest.builder()
+        NotificationRequest notificationRequest = NotificationRequest.builder()
                 .toCostumerEmail(costumer.getEmail())
                 .toCostumerId(costumer.getId())
                 .message("Hi %s!%n Welcome to...etc".formatted(costumer.getFirstname()))
                 .build();
-        mqMessageProducer.publish(notificationRequest, "", "");
+        mqMessageProducer.publish(notificationRequest, "internal.exchange", "internal.notification.routing-key");
     }
 
     public List<Costumer> findAll() {

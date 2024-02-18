@@ -12,7 +12,7 @@ public class NotificationService {
 
     private final NotificationRepository notificationRepository;
 
-    public void sendNotification(NotificationRequest notificationRequest) {
+    public void send(NotificationRequest notificationRequest) {
         Notification notification = Notification.builder()
                 .sender("MyDomain")
                 .toCustomerId(notificationRequest.toCostumerId())
