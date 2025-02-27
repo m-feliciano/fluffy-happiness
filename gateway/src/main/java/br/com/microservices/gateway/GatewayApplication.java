@@ -1,16 +1,14 @@
-package br.com.microservices.fraud;
+package br.com.microservices.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = "br.com.microservices.clients")
-public class FraudApp {
+public class GatewayApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FraudApp.class);
+        SpringApplication.run(GatewayApplication.class);
     }
 }

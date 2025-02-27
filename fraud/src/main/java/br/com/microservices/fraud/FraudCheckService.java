@@ -1,18 +1,16 @@
 package br.com.microservices.fraud;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
 @Service
 public class FraudCheckService {
 
     private final FraudCheckRepository fraudCheckRepository;
-
-    public FraudCheckService(FraudCheckRepository fraudCheckRepository) {
-        this.fraudCheckRepository = fraudCheckRepository;
-    }
 
     public Boolean isFraudster(@NotNull Long costumerId) {
         Boolean fraudster = fraudCheckRepository.existsByCostumerIdAndIsFraudTrue(costumerId);

@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface INotificationClient {
 
     @PostMapping(path = "api/v1/")
-    void sendNotification(@RequestBody NotificationRequest request);
+    void send(@RequestBody NotificationRequest request);
 }
