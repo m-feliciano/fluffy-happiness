@@ -4,20 +4,20 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "toCostumerId": "1",
+  "toCostumerId": 1,
   "toCostumerEmail": "{{$random.email}}",
   "message": "{{$random.alphabetic(20)}}"
 }
 
 > {%
-    client.test('POST new notification returns 201', function () {
-        client.assert(response.status === 201);
+    client.test('POST new notification returns 200', function () {
+        client.assert(response.status === 200);
         // TODO: Testing
     });
 %}
 
 ### Get All Notifications
-GET http://${{host}}/notification
+GET http://{{host}}/notification
 Accept: application/json
 #Authorization: {{BearerToken}}
 

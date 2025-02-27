@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -21,5 +22,9 @@ public class NotificationService {
                 .createdAt(LocalDateTime.now())
                 .build();
         notificationRepository.save(notification);
+    }
+
+    public List<Notification> findAll() {
+        return notificationRepository.findAll();
     }
 }

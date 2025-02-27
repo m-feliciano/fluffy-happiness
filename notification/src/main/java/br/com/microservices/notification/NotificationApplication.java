@@ -1,8 +1,5 @@
 package br.com.microservices.notification;
 
-import br.com.microservices.amqp.RabbitMQMessageProducer;
-import br.com.microservices.notification.amqp.NotificationConfiguration;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -22,7 +19,8 @@ public class NotificationApplication {
         SpringApplication.run(NotificationApplication.class);
     }
 
-//    public CommandLineRunner commandLineRunner(
+//    @Bean
+//    CommandLineRunner commandLineRunner(
 //            RabbitMQMessageProducer producer,
 //            NotificationConfiguration configuration) {
 //        return args -> {

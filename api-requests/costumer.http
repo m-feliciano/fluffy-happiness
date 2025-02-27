@@ -1,5 +1,5 @@
 ### Get All Users
-GET http://${{host}}/costumers
+GET http://{{host}}/costumers
 Accept: application/json
 #Authorization: {{BearerToken}}
 
