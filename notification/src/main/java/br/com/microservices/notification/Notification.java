@@ -23,7 +23,7 @@ public class Notification {
             sequenceName = "notification_id_sequence")
     private Long id;
 
-    @Column(name = "to_costumer_id")
+    @Column(name = "to_customer_id")
     private Long toCustomerId;
 
     @Column(name = "to_customer_email")

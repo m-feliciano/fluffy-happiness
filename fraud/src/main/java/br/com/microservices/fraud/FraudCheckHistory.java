@@ -27,8 +27,8 @@ public class FraudCheckHistory {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "costumer_id")
-    private Long costumerId;
+    @Column(name = "customer_id")
+    private Long customerId;
 
     @Column(name = "is_fraud")
     private Boolean isFraud;

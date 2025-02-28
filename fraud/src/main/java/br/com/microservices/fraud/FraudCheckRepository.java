@@ -10,7 +10,7 @@ public interface FraudCheckRepository extends JpaRepository<FraudCheckHistory, L
 //            SELECT CASE WHEN count() > 0
 //            THEN true ELSE false END
 //            FROM FraudCheckHistory f
-//            WHERE f.costumerId = :costumerId AND f.isFraud = true""")
-//    boolean existsFraudById(@Param("costumerId") Long costumerId);
-    boolean existsByCostumerIdAndIsFraudTrue(Long costumerId);
+//            WHERE f.customerId = :customerId AND f.isFraud = true""")
+//    boolean existsFraudById(@Param("customerId") Long customerId);
+    boolean existsBycustomerIdAndIsFraudTrue(Long customerId);
 }

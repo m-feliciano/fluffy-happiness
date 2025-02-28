@@ -1,4 +1,4 @@
-package br.com.microservices.costumer;
+package br.com.microservices.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,15 +9,15 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication(
         scanBasePackages = {
                 "br.com.microservices.amqp",
-                "br.com.microservices.costumer"
+                "br.com.microservices.customer"
         }
 )
 @EnableFeignClients(basePackages = {
         "br.com.microservices.clients"
 })
-public class CostumerApplication {
+public class CustomerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CostumerApplication.class);
+        SpringApplication.run(CustomerApplication.class);
     }
 }

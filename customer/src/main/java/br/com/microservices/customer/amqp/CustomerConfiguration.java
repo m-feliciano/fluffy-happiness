@@ -1,4 +1,4 @@
-package br.com.microservices.costumer.amqp;
+package br.com.microservices.customer.amqp;
 
 import lombok.Getter;
 import org.springframework.amqp.core.Binding;
@@ -11,16 +11,16 @@ import org.springframework.context.annotation.Configuration;
 
 @Getter
 @Configuration
-public class CostumerConfiguration {
+public class CustomerConfiguration {
 
     @Value("${rabbitmq.exchanges.internal}")
     private String internalExchange;
 
-    @Value("${rabbitmq.queues.costumer}")
-    private String costumerQueue;
+    @Value("${rabbitmq.queues.customer}")
+    private String customerQueue;
 
-    @Value("${rabbitmq.routing-keys.internal-costumer}")
-    private String internalCostumerRoutingKey;
+    @Value("${rabbitmq.routing-keys.internal-customer}")
+    private String internalcustomerRoutingKey;
 
     @Bean
     public TopicExchange internalTopicExchange() {
@@ -28,15 +28,15 @@ public class CostumerConfiguration {
     }
 
     @Bean
-    public Queue costumerQueue() {
-        return new Queue(this.costumerQueue);
+    public Queue customerQueue() {
+        return new Queue(this.customerQueue);
     }
 
     @Bean
-    public Binding internalCostumerBinding() {
+    public Binding internalcustomerBinding() {
         return BindingBuilder
-                .bind(costumerQueue())
+                .bind(customerQueue())
                 .to(internalTopicExchange())
-                .with(this.internalCostumerRoutingKey);
+                .with(this.internalcustomerRoutingKey);
     }
 }

@@ -1,6 +1,6 @@
 package br.com.microservices.amqp;
 
-import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -12,12 +12,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@AllArgsConstructor
+@NoArgsConstructor
 public class RabbitConfiguration {
 
     @Bean
     public ConnectionFactory connectionFactory() {
-        return new CachingConnectionFactory("localhost");
+        // FIXME: This should be read from a configuration file
+        return new CachingConnectionFactory("rabbitmq", 5672);
     }
 
     @Bean

@@ -1,6 +1,5 @@
-package br.com.microservices.costumer.transfer;
+package br.com.microservices.customer.transfer;
 
-import br.com.microservices.costumer.Costumer;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -10,10 +9,10 @@ import lombok.Builder;
 import java.io.Serializable;
 
 /**
- * DTO for {@link Costumer}
+ * DTO for {@link Customer}
  */
 @Builder
-public record CostumerDto(Long costumerId,
+public record CustomerDto(Long customerId,
                           @NotNull @Size(min = 2) @NotEmpty String firstname,
                           String lastname,
                           @Email String email) implements Serializable {

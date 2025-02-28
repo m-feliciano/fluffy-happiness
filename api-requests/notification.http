@@ -4,8 +4,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "toCostumerId": 1,
-  "toCostumerEmail": "{{$random.email}}",
+  "tocustomerId": 1,
+  "tocustomerEmail": "{{$random.email}}",
   "message": "{{$random.alphabetic(20)}}"
 }
 
@@ -22,4 +22,4 @@ Accept: application/json
 #Authorization: {{BearerToken}}
 
 # Redirect to
-#>> data-costumer.json
+#>> data-customer.json

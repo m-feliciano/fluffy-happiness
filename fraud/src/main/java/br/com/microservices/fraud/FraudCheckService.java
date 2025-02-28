@@ -12,11 +12,11 @@ public class FraudCheckService {
 
     private final FraudCheckRepository fraudCheckRepository;
 
-    public Boolean isFraudster(@NotNull Long costumerId) {
-        Boolean fraudster = fraudCheckRepository.existsByCostumerIdAndIsFraudTrue(costumerId);
+    public Boolean isFraudster(@NotNull Long customerId) {
+        Boolean fraudster = fraudCheckRepository.existsBycustomerIdAndIsFraudTrue(customerId);
 
         FraudCheckHistory entity = FraudCheckHistory.builder()
-                .costumerId(costumerId)
+                .customerId(customerId)
                 .isFraud(fraudster)
                 .createdAt(LocalDateTime.now())
                 .build();
