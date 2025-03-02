@@ -1,0 +1,14 @@
+# Service.yml is a Kubernetes configuration file that defines a service for the Postgres pod.
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP # A ClusterIP service is the default Kubernetes service. It gives you a stable IP address that other pods can use to access the service.
+

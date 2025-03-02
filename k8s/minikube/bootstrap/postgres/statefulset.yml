@@ -1,0 +1,42 @@
+# StatefulSet is the workload API object used to manage stateful applications.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec: # The StatefulSet spec field is a specification of the desired behavior of the StatefulSet.
+  serviceName: postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      name: postgres
+      labels:
+        app: postgres
+    spec:
+      automountServiceAccountToken: false # The automountServiceAccountToken field is set to false to prevent the ServiceAccount token from being mounted.
+      volumes:
+        - name: postgres
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
+      containers: # The containers field is a list of containers belonging to the pod.
+        - name: postgres
+          image: postgres:16.8
+          imagePullPolicy: IfNotPresent
+          envFrom: # The envFrom field is a list of sources to populate the container's environment variables.
+            - configMapRef:
+                name: postgres-config
+          volumeMounts: # The volumeMounts field is a list of volumes that should be mounted into the container.
+            - mountPath: /var/lib/pgsql/data
+              name: postgres
+          resources: # The resources field is a list of resources used by the container.
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      restartPolicy: Always

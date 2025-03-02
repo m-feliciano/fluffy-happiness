@@ -16,8 +16,8 @@ public class NotificationService {
     public void send(NotificationRequest notificationRequest) {
         Notification notification = Notification.builder()
                 .sender("MyDomain")
-                .toCustomerId(notificationRequest.tocustomerId())
-                .toCustomerEmail(notificationRequest.tocustomerEmail())
+                .toCustomerId(notificationRequest.toCustomerId())
+                .toCustomerEmail(notificationRequest.toCustomerEmail())
                 .message(notificationRequest.message())
                 .createdAt(LocalDateTime.now())
                 .build();

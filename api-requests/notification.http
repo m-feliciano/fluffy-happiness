@@ -4,8 +4,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "tocustomerId": 1,
-  "tocustomerEmail": "{{$random.email}}",
+  "toCustomerId": 1,
+  "toCustomerEmail": "{{$random.email}}",
   "message": "{{$random.alphabetic(20)}}"
 }
 

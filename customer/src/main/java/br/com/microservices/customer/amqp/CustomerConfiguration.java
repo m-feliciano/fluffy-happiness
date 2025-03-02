@@ -20,7 +20,7 @@ public class CustomerConfiguration {
     private String customerQueue;
 
     @Value("${rabbitmq.routing-keys.internal-customer}")
-    private String internalcustomerRoutingKey;
+    private String internalCustomerRoutingKey;
 
     @Bean
     public TopicExchange internalTopicExchange() {
@@ -37,6 +37,6 @@ public class CustomerConfiguration {
         return BindingBuilder
                 .bind(customerQueue())
                 .to(internalTopicExchange())
-                .with(this.internalcustomerRoutingKey);
+                .with(this.internalCustomerRoutingKey);
     }
 }

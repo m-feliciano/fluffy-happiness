@@ -37,8 +37,8 @@ public class CustomerService {
         }
 
         NotificationRequest notificationRequest = NotificationRequest.builder()
-                .tocustomerEmail(customer.getEmail())
-                .tocustomerId(customer.getId())
+                .toCustomerEmail(customer.getEmail())
+                .toCustomerId(customer.getId())
                 .message("Hi %s!%n Welcome to...etc".formatted(customer.getFirstname()))
                 .build();
         mqMessageProducer.publish(notificationRequest, "internal.exchange", "internal.notification.routing-key");

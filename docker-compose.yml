@@ -59,32 +59,33 @@ services:
       retries: 5
     restart: unless-stopped
 
-  eureka-server:
-    image: mfeliciano1/eureka-server:latest
-    container_name: eureka-server
-    restart: unless-stopped
-    ports:
-      - "8761:8761"
-    networks:
-      - spring
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - zipkin
+# Eureka and Gateway are commented out because Kubernetes will handle service discovery and routing
+#  eureka-server:
+#    image: mfeliciano1/eureka-server:latest
+#    container_name: eureka-server
+#    restart: unless-stopped
+#    ports:
+#      - "8761:8761"
+#    networks:
+#      - spring
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    depends_on:
+#      - zipkin
 
-  gateway:
-    image: mfeliciano1/api-gateway:latest
-    container_name: api-gateway
-    restart: unless-stopped
-    ports:
-      - "8083:8083"
-    networks:
-      - spring
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - zipkin
-      - eureka-server
+#  gateway:
+#    image: mfeliciano1/api-gateway:latest
+#    container_name: api-gateway
+#    restart: unless-stopped
+#    ports:
+#      - "8083:8083"
+#    networks:
+#      - spring
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    depends_on:
+#      - zipkin
+#      - eureka-server
 
   customer:
     image: mfeliciano1/customer:latest
@@ -99,7 +100,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - zipkin
-      - eureka-server
+#      - eureka-server
       - rabbitmq
       - postgres
 
@@ -116,7 +117,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - zipkin
-      - eureka-server
+#      - eureka-server
       - postgres
       - rabbitmq
 
@@ -133,7 +134,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - zipkin
-      - eureka-server
+#      - eureka-server
       - rabbitmq
       - postgres
 
