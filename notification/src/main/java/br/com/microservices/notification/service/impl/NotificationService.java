@@ -1,6 +1,9 @@
-package br.com.microservices.notification;
+package br.com.microservices.notification.service.impl;
 
 import br.com.microservices.clients.notification.NotificationRequest;
+import br.com.microservices.notification.domain.model.Notification;
+import br.com.microservices.notification.repository.NotificationRepository;
+import br.com.microservices.notification.service.INotificationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +12,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class NotificationService {
+public class NotificationService implements INotificationService {
 
     private final NotificationRepository notificationRepository;
 

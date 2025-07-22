@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 )
 public interface INotificationClient {
 
-    @PostMapping(path = "api/v1/")
+    @PostMapping(path = "/api/v1/")
     void send(@RequestBody NotificationRequest request);
 }

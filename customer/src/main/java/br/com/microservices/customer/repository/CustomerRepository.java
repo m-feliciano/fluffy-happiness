@@ -1,5 +1,6 @@
-package br.com.microservices.customer;
+package br.com.microservices.customer.repository;
 
+import br.com.microservices.customer.domain.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;

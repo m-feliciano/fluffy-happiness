@@ -1,9 +1,12 @@
-package br.com.microservices.customer;
+package br.com.microservices.customer.service.impl;
 
 import br.com.microservices.amqp.RabbitMQMessageProducer;
 import br.com.microservices.clients.fraud.FraudCheckResponse;
 import br.com.microservices.clients.fraud.IFraudClient;
 import br.com.microservices.clients.notification.NotificationRequest;
+import br.com.microservices.customer.domain.model.Customer;
+import br.com.microservices.customer.repository.CustomerRepository;
+import br.com.microservices.customer.service.ICustomerService;
 import br.com.microservices.customer.transfer.CustomerDto;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang.BooleanUtils;
@@ -13,7 +16,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class CustomerService {
+public class CustomerService implements ICustomerService {
 
     private final CustomerRepository customerRepository;
     private final RabbitMQMessageProducer mqMessageProducer;

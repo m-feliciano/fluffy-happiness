@@ -1,6 +1,6 @@
 package br.com.microservices.customer.transfer;
 
-import br.com.microservices.customer.Customer;
+import br.com.microservices.customer.domain.model.Customer;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

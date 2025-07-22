@@ -1,4 +1,4 @@
-package br.com.microservices.notification;
+package br.com.microservices.notification.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;

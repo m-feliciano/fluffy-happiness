@@ -1,5 +1,6 @@
-package br.com.microservices.customer;
+package br.com.microservices.customer.controller;
 
+import br.com.microservices.customer.service.ICustomerService;
 import br.com.microservices.customer.transfer.CustomerDto;
 import br.com.microservices.customer.transfer.CustomerMapper;
 import lombok.AllArgsConstructor;
@@ -17,10 +18,10 @@ import java.util.List;
 @Slf4j
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/v1/customers")
+@RequestMapping("/api/v1/customers")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    private final ICustomerService customerService;
 
     @PostMapping
     public ResponseEntity<CustomerDto> register(@RequestBody @Validated CustomerDto customerDto) {
@@ -31,9 +32,9 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<List<CustomerDto>> findAll() {
-        List<CustomerDto> dtos = customerService.findAll().stream()
+        List<CustomerDto> list = customerService.findAll().stream()
                 .map(CustomerMapper::toDto)
                 .toList();
-        return ResponseEntity.ok().body(dtos);
+        return ResponseEntity.ok().body(list);
     }
 }

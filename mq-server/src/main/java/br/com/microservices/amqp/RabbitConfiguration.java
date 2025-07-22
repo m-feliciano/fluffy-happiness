@@ -8,6 +8,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,10 +16,12 @@ import org.springframework.context.annotation.Configuration;
 @NoArgsConstructor
 public class RabbitConfiguration {
 
+    @Value("${rabbitmq.host:localhost}")
+    private String rabbitmq;
+
     @Bean
     public ConnectionFactory connectionFactory() {
-        // FIXME: This should be read from a configuration file
-        return new CachingConnectionFactory("rabbitmq", 5672);
+        return new CachingConnectionFactory(rabbitmq, 5672);
     }
 
     @Bean

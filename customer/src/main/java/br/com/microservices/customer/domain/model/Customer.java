@@ -1,4 +1,4 @@
-package br.com.microservices.customer;
+package br.com.microservices.customer.domain.model;
 
 
 import jakarta.persistence.*;
