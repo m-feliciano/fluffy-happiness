@@ -1,18 +1,18 @@
 ### Get All Users
-GET http://{{host}}/costumers
+GET http://{{host}}/customers
 Accept: application/json
 #Authorization: {{BearerToken}}
 
 # Redirect to
-#>> data-costumer.json
+#>> data-customer.json
 
-### Create New Costumer
+### Create New customer
 #< {%
 #    pre-request config
 #    request.variables.set("key", "value");
 #    POST path/param?{{key}}
 #%}
-POST http://{{host}}/costumers
+POST http://{{host}}/customers
 Accept: application/json
 Content-Type: application/json
 
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 > {%
-    client.test('POST new costumer returns 200', function () {
+    client.test('POST new customer returns 200', function () {
         client.assert(response.status === 200);
         // TODO: Testing
     });

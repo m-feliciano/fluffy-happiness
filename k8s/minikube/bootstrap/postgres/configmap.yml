@@ -1,0 +1,14 @@
+# ConfigMap.yml is a Kubernetes configuration file that defines a ConfigMap for the Postgres pod.
+# It is used to store non-sensitive data in key-value pairs.
+# For sensitive data, use a Secret object. Example:
+# kubectl create secret generic postgres-secret --from-literal=POSTGRES_PASSWORD=senha123
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+data:
+  POSTGRES_DB: 'microservices'
+  POSTGRES_USER: 'usuario'
+  POSTGRES_PASSWORD: 'senha'
+
+# Testing: kubectl exec -it postgres-0 -- psql -h localhost -U POSTGRES_USER --password -p 5432 POSTGRES_DB

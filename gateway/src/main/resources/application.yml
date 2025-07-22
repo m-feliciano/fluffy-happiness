@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: gateway
+    name: api-gateway
   cloud:
     gateway:
       routes:
@@ -11,10 +11,10 @@ spring:
           uri: lb://FRAUD
           predicates:
             - Path=/api/v1/fraud-check/**
-        - id: costumer
-          uri: lb://COSTUMER
+        - id: customer
+          uri: lb://CUSTOMER
           predicates:
-            - Path=/api/v1/costumers/**
+            - Path=/api/v1/customers/**
 
 eureka:
   client:

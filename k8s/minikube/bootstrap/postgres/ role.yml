@@ -1,0 +1,10 @@
+# Role.yml is a Kubernetes configuration file that defines a Role for the Postgres pod.
+apiVersion: rbac.authorization.k8s.io/v1 # The apiVersion field specifies the version of the Kubernetes API that the Role belongs to.
+kind: Role
+metadata:
+  namespace: default
+  name: postgres-role
+rules: # The rules field is a list of access rules that the Role grants to the ServiceAccount.
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "watch", "list"] # The verbs field is a list of operations that the ServiceAccount can perform on the resources.

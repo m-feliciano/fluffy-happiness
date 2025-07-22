@@ -1,3 +1,5 @@
 spring:
   application:
-    name: mq-server
+    name: amqp-server
+  rabbitmq:
+    host: localhost:5672

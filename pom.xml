@@ -12,7 +12,7 @@
     <name>microservices-app</name>
     <url>https://www.microservicesapp.com.br</url>
     <modules>
-        <module>costumer</module>
+        <module>customer</module>
         <module>fraud</module>
         <module>eureka-server</module>
         <module>clients</module>
@@ -126,9 +126,14 @@
                     <version>3.4.3</version>
                     <configuration>
                         <from>
-                            <image>eclipse-temurin:17</image>
+                            <image>eclipse-temurin@sha256:e5e053e3cc60032a3c08ffbc369677acebdce23f80f712eeaa19abaed5506d8c</image>
                         </from>
                         <to>
+                            <image>${image}</image>
+                            <auth>
+                                <username>${env.DOCKER_USERNAME}</username>
+                                <password>${env.DOCKER_PASSWORD}</password>
+                            </auth>
                             <tags>
                                 <tag>latest</tag>
                             </tags>

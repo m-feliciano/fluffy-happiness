@@ -9,7 +9,7 @@ import java.io.Serializable;
  * DTO
  */
 @Builder
-public record NotificationRequest(@NonNull Long toCostumerId,
-                                  @NonNull String toCostumerEmail,
+public record NotificationRequest(@NonNull Long toCustomerId,
+                                  @NonNull String toCustomerEmail,
                                   @NonNull String message) implements Serializable {
 }

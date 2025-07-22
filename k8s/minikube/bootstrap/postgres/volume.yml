@@ -1,0 +1,37 @@
+# The PersistentVolume is a piece of storage in the cluster that has been provisioned by an administrator.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pv-volume
+  labels:
+    type: local
+    app: postgres
+spec:
+  storageClassName: manual
+  capacity:
+    storage: "4Gi"
+  accessModes: [ "ReadWriteMany" ]
+  hostPath:
+    path: /mnt/data
+---
+# The PersistentVolumeClaim is a request for storage by a user.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim
+  labels:
+    app: postgres
+spec:
+  storageClassName: manual
+  accessModes: [ "ReadWriteMany" ]
+  resources:
+    requests:
+      storage: 4Gi
+---
+# Path: k8s/minikube/bootstrap/postgres/storage-class.yml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: manual
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
