@@ -16,11 +16,4 @@ public class FeignClientConfig {
     public ErrorDecoder errorDecoder() {
         return new FeignErrorDecode();
     }
-
-    @Bean
-    public Retryer retryer() {
-        Retryer.Default retryer = new Retryer.Default(100, TimeUnit.SECONDS.toSeconds(2), 3);
-        return new FeignRetryable.AnnotationRetryable(retryer);
-
-    }
 }

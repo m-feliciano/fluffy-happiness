@@ -50,3 +50,10 @@ management:
   zipkin:
     tracing:
       endpoint: http://localhost:9411/api/v2/spans
+
+fraud:
+  client:
+    retry:
+      delay: 500
+      max-attempts: 3
+      multiplier: 1.5

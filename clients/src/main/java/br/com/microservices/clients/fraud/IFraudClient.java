@@ -1,7 +1,6 @@
 package br.com.microservices.clients.fraud;
 
 import br.com.microservices.clients.config.FeignClientConfig;
-import br.com.microservices.clients.config.FeignRetryable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 )
 public interface IFraudClient {
 
-    @FeignRetryable
     @GetMapping(path = "/api/v1/fraud-check/{customerId}")
     FraudCheckResponse isFraudster(@PathVariable("customerId") Long customerId);
-
 }
 

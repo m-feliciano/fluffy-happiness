@@ -8,8 +8,12 @@ import br.com.microservices.customer.domain.model.Customer;
 import br.com.microservices.customer.repository.CustomerRepository;
 import br.com.microservices.customer.service.ICustomerService;
 import br.com.microservices.customer.transfer.CustomerDto;
+import feign.RetryableException;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang.BooleanUtils;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +26,14 @@ public class CustomerService implements ICustomerService {
     private final RabbitMQMessageProducer mqMessageProducer;
     private final IFraudClient fraudClient;
 
+    @Retryable(
+            retryFor = {RetryableException.class},
+            maxAttemptsExpression = "${fraud.client.retry.max-attempts:5}",
+            backoff = @Backoff(
+                    delayExpression = "${fraud.client.retry.delay:200}",
+                    maxDelayExpression = "${fraud.client.retry.max-delay:3000}",
+                    multiplierExpression = "${fraud.client.retry.multiplier:1.5}")
+    )
     public void save(CustomerDto dto) {
         if (isEmailTaken(dto.email())) {
             throw new IllegalStateException("E-mail has already been taken");
@@ -53,5 +65,10 @@ public class CustomerService implements ICustomerService {
 
     public boolean isEmailTaken(String email) {
         return customerRepository.existsByEmail(email);
+    }
+
+    @Recover
+    public void recover(RetryableException e, CustomerDto customerDto) {
+
     }
 }
