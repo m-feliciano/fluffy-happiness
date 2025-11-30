@@ -1,15 +1,15 @@
 package br.com.microservices.customer.service;
 
-import br.com.microservices.customer.domain.model.Customer;
-import br.com.microservices.customer.transfer.CustomerDto;
-
-import java.util.List;
+import br.com.microservices.customer.domain.request.CustomerRequest;
+import br.com.microservices.customer.domain.response.CustomerResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ICustomerService {
 
-    void save(CustomerDto dto);
+    CustomerResponse save(CustomerRequest request);
 
     boolean isEmailTaken(String email);
 
-    List<Customer> findAll();
+    Page<CustomerResponse> findAll(Pageable pageable);
 }

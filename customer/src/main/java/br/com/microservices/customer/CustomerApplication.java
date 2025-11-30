@@ -12,7 +12,8 @@ import org.springframework.retry.annotation.EnableRetry;
 @SpringBootApplication(
         scanBasePackages = {
                 "br.com.microservices.amqp",
-                "br.com.microservices.customer"
+                "br.com.microservices.customer",
+                "br.com.microservices.clients.security"
         }
 )
 @EnableFeignClients(basePackages = {

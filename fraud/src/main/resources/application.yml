@@ -19,6 +19,16 @@ spring:
     addresses: localhost:5672
   zipkin:
     base-url: http://localhost:9411
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 50
+        one-indexed-parameters: false
+        page-parameter: page
+        size-parameter: size
+      sort:
+        sort-parameter: sort
 
 eureka:
   client:
@@ -32,6 +42,12 @@ logging:
   pattern:
     level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
 
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  expiration: 86400000
+  validation:
+    use-auth-service: true  # Valida token com auth-service (verifica blacklist)
+
 management:
   tracing:
     enabled: true
@@ -42,3 +58,12 @@ management:
   zipkin:
     tracing:
       endpoint: http://localhost:9411/api/v2/spans
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operationsSorter: method
+    tagsSorter: alpha

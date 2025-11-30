@@ -1,0 +1,616 @@
+type: collection.insomnia.rest/5.0
+name: API Endpoints
+meta:
+  id: wrk_97f4ae7f564e4b39812f6ddb7fc8c080
+  created: 1762137828643
+  modified: 1762138204084
+  description: ""
+collection:
+  - name: Fraud Service
+    meta:
+      id: fld_3df431848820462b81d01d650d22a7ac
+      created: 1730592000000
+      modified: 1730592000000
+      sortKey: -1730592000000
+      description: Fraud check operations
+    children:
+      - url: "{{ _.base_url }}/actuator/health"
+        name: Health Check
+        meta:
+          id: req_30c79e0ab39443b19f30bd44619345ac
+          created: 1730592000000
+          modified: 1730592000000
+          isPrivate: false
+          description: Check fraud service health
+          sortKey: -1730592000000
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/fraud-check/{{ _.customer_id }}"
+        name: Check For Fraud
+        meta:
+          id: req_e3aac3c520524aa18034fd1dd6f0b5a4
+          created: 1730592000000
+          modified: 1730592000000
+          isPrivate: false
+          description: Check if a customer is fraudulent
+          sortKey: -1730591900000
+        method: GET
+        headers:
+          - name: Accept
+            value: application/json
+          - name: Authorization
+            value: Bearer {{ _.access_token }}
+        scripts:
+          afterResponse: >-
+            insomnia.test('Check if status is 200', () => {
+                insomnia.expect(insomnia.response.code).to.eql(200);
+            });
+
+            insomnia.test('Check if response has isFraud field', () => {
+                insomnia.expect(insomnia.response.json()).to.have.property('isFraud');
+            });
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      base_url: http://localhost:8089
+      customer_id: "1"
+  - name: Notification Service
+    meta:
+      id: fld_9d12996319ef4a039ce59c0fba3ae622
+      created: 1730592000000
+      modified: 1762148598670
+      sortKey: -1730592000000
+      description: Notification operations
+    children:
+      - url: "{{ _.base_url }}/api/v1/notification"
+        name: Create Notification
+        meta:
+          id: req_70f8a89fcc4446c988a8e54d59b0de71
+          created: 1730592000000
+          modified: 1762147267681
+          isPrivate: false
+          description: Send a new notification
+          sortKey: -1730591900000
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "toCustomerId": 1,
+              "toCustomerEmail": "{% faker 'internet', '', '', '', '', '', '', '', '', '', '', '', '', '', 'email', '', '', '', '', '', '', '', '', '', '', '', 'en' %}",
+              "message": "Welcome to our service!"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_61628d8683e04fca8fe48b1b809b4cd5
+          - name: Authorization
+            value: Bearer {{ _.access_token }}
+            id: pair_7d844fb4a062478e81d5292ae397d22e
+            disabled: false
+        scripts:
+          afterResponse: |-
+            insomnia.test('Check if status is 200', () => {
+                insomnia.expect(insomnia.response.code).to.eql(200);
+            });
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/notification"
+        name: Get All Notifications
+        meta:
+          id: req_971031adaa22472fb165d2773ccda992
+          created: 1730592000000
+          modified: 1762140471929
+          isPrivate: false
+          description: List all notifications (paginated)
+          sortKey: -1730591800000
+        method: GET
+        headers:
+          - name: Accept
+            value: application/json
+            id: pair_bf24cacbf1f7465181d2867c8f779597
+          - name: Authorization
+            value: Bearer {{ _.access_token }}
+            id: pair_997f05d91cf2407fb46e0397ac90fa45
+            disabled: false
+        scripts:
+          afterResponse: |-
+            insomnia.test('Check if status is 200', () => {
+                insomnia.expect(insomnia.response.code).to.eql(200);
+            });
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/actuator/health"
+        name: Health Check
+        meta:
+          id: req_d3da81dbb3f848dfb75e5aad1f3017dd
+          created: 1730592000000
+          modified: 1730592000000
+          isPrivate: false
+          description: Check notification service health
+          sortKey: -1730592000000
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      base_url: http://localhost:8086
+  - name: Customer Service
+    meta:
+      id: fld_be2d6c370ed54828aab7e1b42d654ffd
+      created: 1730592000000
+      modified: 1762147334484
+      sortKey: -1730592000000
+      description: Customer CRUD operations
+    children:
+      - url: "{{ _.base_url }}/actuator/health"
+        name: Health Check
+        meta:
+          id: req_23232e6fa34342caa86e6d70489fc40e
+          created: 1730592000000
+          modified: 1730592000000
+          isPrivate: false
+          description: Check customer service health
+          sortKey: -1730592000000
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/customers"
+        name: Test Unauthorized Access
+        meta:
+          id: req_5c6990ece8364e6b9a3162a76fab584f
+          created: 1730592000000
+          modified: 1730592000000
+          isPrivate: false
+          description: Should return 401 or 403
+          sortKey: -1730591700000
+        method: GET
+        headers:
+          - name: Accept
+            value: application/json
+        scripts:
+          afterResponse: |-
+            insomnia.test('Check if status is 401 or 403', () => {
+                const status = insomnia.response.code;
+                insomnia.expect([401, 403]).to.include(status);
+            });
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/customers"
+        name: Create Customer
+        meta:
+          id: req_66ccdd50712542c29adc31a3f45555a5
+          created: 1730592000000
+          modified: 1762143868108
+          isPrivate: false
+          description: Create new customer (requires OPERATOR, MANAGER or ADMIN role)
+          sortKey: -1730591800000
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "firstname": "{% faker 'name', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'firstName', '', '', '', '', '', '', '', 'en' %}",
+              "lastname": "{% faker 'name', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'lastName', '', '', '', '', '', '', '', 'en' %}",
+              "email": "{% faker 'internet', '', '', '', '', '', '', '', '', '', '', '', '', '', 'email', '', '', '', '', '', '', '', '', '', '', '', 'en' %}"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_0935d6883d494945acb961d987d1aaa7
+          - name: Authorization
+            value: Bearer {{ _.access_token }}
+            id: pair_c3baa95dbe8f414d9040cab6cb9d5473
+            disabled: false
+        scripts:
+          afterResponse: |-
+            insomnia.test('Check if status is 200', () => {
+                insomnia.expect(insomnia.response.code).to.eql(201);
+            });
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/customers"
+        name: Get All Customers
+        meta:
+          id: req_7ab912b9dc9f42b0a97a69d5ac880ae9
+          created: 1730592000000
+          modified: 1762139242131
+          isPrivate: false
+          description: List all customers (requires authentication)
+          sortKey: -1730591900000
+        method: GET
+        headers:
+          - name: Accept
+            value: application/json
+            id: pair_0115a93bc9a84160924a824730087546
+          - name: Authorization
+            value: Bearer {{ _.access_token }}
+            id: pair_068f7e840ff14d31b8e0904d4c66ca36
+        scripts:
+          afterResponse: |-
+            insomnia.test('Check if status is 200', () => {
+                insomnia.expect(insomnia.response.code).to.eql(200);
+            });
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      base_url: http://localhost:8081
+  - name: Auth Service
+    meta:
+      id: fld_e97c52263017417ab2cd377a71075d34
+      created: 1730592000000
+      modified: 1762148596037
+      sortKey: -1730592000000
+      description: JWT Authentication endpoints
+    children:
+      - url: "{{ _.base_url }}/api/v1/auth/refresh"
+        name: Refresh Access Token
+        meta:
+          id: req_15b425d7164d467ab53f6a060634320e
+          created: 1730592000000
+          modified: 1730592000000
+          isPrivate: false
+          description: Refresh the access token using refresh token
+          sortKey: -1730591400000
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "refreshToken": "{{ _.refresh_token }}"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        scripts:
+          afterResponse: >-
+            insomnia.test('Check if status is 200', () => {
+                insomnia.expect(insomnia.response.code).to.eql(200);
+            });
+
+            insomnia.environment.set("access_token",
+            insomnia.response.json().token);
+            insomnia.environment.set("refresh_token",
+            insomnia.response.json().refreshToken);
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/actuator/health"
+        name: Health Check
+        meta:
+          id: req_162aaac813f44a09b100b8ea63cc48be
+          created: 1730592000000
+          modified: 1762138171890
+          isPrivate: false
+          description: Check auth service health
+          sortKey: -1730592000000
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/auth/login"
+        name: Login as Manager
+        meta:
+          id: req_2aa45187d3c04e7dbd52f3de95deb9d2
+          created: 1730592000000
+          modified: 1730592000000
+          isPrivate: false
+          description: Login with manager credentials
+          sortKey: -1730591800000
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "username": "manager",
+              "password": "password123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        scripts:
+          afterResponse: insomnia.environment.set("access_token",
+            insomnia.response.json().token);
+            insomnia.environment.set("refresh_token",
+            insomnia.response.json().refreshToken);
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/auth/login"
+        name: Login as User
+        meta:
+          id: req_32d84c330da04e0ca1b7a58b9508e104
+          created: 1730592000000
+          modified: 1730592000000
+          isPrivate: false
+          description: Login with user credentials
+          sortKey: -1730591600000
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "username": "user",
+              "password": "password123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        scripts:
+          afterResponse: insomnia.environment.set("access_token",
+            insomnia.response.json().token);
+            insomnia.environment.set("refresh_token",
+            insomnia.response.json().refreshToken);
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/auth/login"
+        name: Login as Admin
+        meta:
+          id: req_4425e59a8dc54d4e8b2cc61ab23a5bbb
+          created: 1730592000000
+          modified: 1762139259579
+          isPrivate: false
+          description: Login with admin credentials
+          sortKey: -1730591900000
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "username": "admin",
+              "password": "password123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        scripts:
+          afterResponse: >-
+            insomnia.test('Check if status is 200', () => {
+                insomnia.expect(insomnia.response.code).to.eql(200);
+            });
+
+            insomnia.test('Check if response has token and refreshToken', () =>
+            {
+            	insomnia.expect(insomnia.response.json()).to.have.any.keys('token', 'refreshToken');
+            });
+
+            insomnia.environment.set("access_token",
+            insomnia.response.json().token);
+            insomnia.environment.set("refresh_token",
+            insomnia.response.json().refreshToken);
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/auth/logout"
+        name: Logout
+        meta:
+          id: req_58ffaa5fb8bd48f787baaaf343de4215
+          created: 1730592000000
+          modified: 1762146777379
+          isPrivate: false
+          description: Logout and revoke refresh token
+          sortKey: -1730591300000
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"accessToken": "{{_.access_token}}",
+              "refreshToken": "{{ _.refresh_token }}"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        scripts:
+          afterResponse: |-
+            insomnia.test('Check if status is 200', () => {
+                insomnia.expect(insomnia.response.code).to.eql(200);
+            });
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/auth/register"
+        name: Register New User
+        meta:
+          id: req_9aff6ebaa3be4b029e2492347444dd2c
+          created: 1730592000000
+          modified: 1730592000000
+          isPrivate: false
+          description: Register a new user
+          sortKey: -1730591500000
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "username": "testuser",
+              "email": "testuser@example.com",
+              "password": "password123",
+              "roles": ["ROLE_USER"]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        scripts:
+          afterResponse: >-
+            insomnia.test('Check if status is 200', () => {
+                insomnia.expect(insomnia.response.code).to.eql(200);
+            });
+
+            insomnia.environment.set("access_token",
+            insomnia.response.json().token);
+            insomnia.environment.set("refresh_token",
+            insomnia.response.json().refreshToken);
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/auth/login"
+        name: Login as Operator
+        meta:
+          id: req_a90ef7a093d346408c96c6be78020c05
+          created: 1730592000000
+          modified: 1730592000000
+          isPrivate: false
+          description: Login with operator credentials
+          sortKey: -1730591700000
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "username": "operator",
+              "password": "password123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        scripts:
+          afterResponse: insomnia.environment.set("access_token",
+            insomnia.response.json().token);
+            insomnia.environment.set("refresh_token",
+            insomnia.response.json().refreshToken);
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/api/v1/auth/validate?token={{ _.access_token }}"
+        name: Validate Token
+        meta:
+          id: req_c58bfab2c3d74fd680cc1f2e00c6a01e
+          created: 1730592000000
+          modified: 1730592000000
+          isPrivate: false
+          description: Validate if JWT token is valid
+          sortKey: -1730591200000
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    environment:
+      base_url: http://localhost:8084
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_2aa82d018de74d238d058cd64f7b7828
+    created: 1730592000000
+    modified: 1762148598667
+  cookies:
+    - id: 54e0a28c-82a2-44aa-a1ec-489696dfa653
+      key: JSESSIONID
+      value: 2DCEE70C917B4FA30204B501353BE21F
+      domain: localhost
+      path: /
+      secure: false
+      httpOnly: true
+      creation: 2025-11-03T03:24:21.425Z
+      hostOnly: true
+      lastAccessed: 2025-11-03T03:24:21.425Z
+environments:
+  name: Base Environment
+  meta:
+    id: env_e73022e3a2934e73b72dd9456d67ea48
+    created: 1730592000000
+    modified: 1762148598669
+    isPrivate: false
+  data:
+    access_token: eyJhbGciOiJIUzM4NCJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIiwiYWRtaW46YWxsIiwiY3VzdG9tZXI6ZGVsZXRlIiwiY3VzdG9tZXI6cmVhZCIsImN1c3RvbWVyOndyaXRlIiwiZnJhdWQ6cmVhZCIsImZyYXVkOndyaXRlIiwibm90aWZpY2F0aW9uOnJlYWQiLCJub3RpZmljYXRpb246d3JpdGUiXSwic3ViIjoiYWRtaW4iLCJpYXQiOjE3NjIxNDg1NjcsImV4cCI6MTc2MjIzNDk2N30.uiWrxx29Uu_Tg0MBUxxdYJUEs0Ml2UMswCoTggIX0W6rYmOL6EJGropN-Z5Klvyw
+    refresh_token: 5008f795-9e64-4c20-867c-04e7a10632ff

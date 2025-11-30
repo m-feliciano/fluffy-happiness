@@ -17,6 +17,16 @@ spring:
     show-sql: true
   rabbitmq:
     addresses: localhost:5672
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 50
+        one-indexed-parameters: false
+        page-parameter: page
+        size-parameter: size
+      sort:
+        sort-parameter: sort
 
 eureka:
   client:
@@ -48,3 +58,12 @@ management:
   zipkin:
     tracing:
       endpoint: http://localhost:9411/api/v2/spans
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operationsSorter: method
+    tagsSorter: alpha

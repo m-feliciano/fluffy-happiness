@@ -59,6 +59,20 @@ services:
       retries: 5
     restart: unless-stopped
 
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - spring
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
 # Eureka and Gateway are commented out because Kubernetes will handle service discovery and routing
 #  eureka-server:
 #    image: mfeliciano1/eureka-server:latest
@@ -137,6 +151,22 @@ services:
 #      - eureka-server
       - rabbitmq
       - postgres
+  auth-service:
+    image: mfeliciano1/auth-service:latest
+    container_name: auth-service
+    restart: unless-stopped
+    networks:
+      - spring
+      - postgres
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      #      - eureka-server
+      - postgres
+      - redis
 
 volumes:
   postgres:
