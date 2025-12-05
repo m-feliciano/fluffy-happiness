@@ -1,13 +1,13 @@
 package br.com.microservices.notification.service;
 
 import br.com.microservices.clients.notification.NotificationRequest;
-import br.com.microservices.notification.domain.model.Notification;
-
-import java.util.List;
+import br.com.microservices.notification.domain.response.NotificationResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface INotificationService {
 
-    void send(NotificationRequest notificationRequest);
+    NotificationResponse send(NotificationRequest notificationRequest);
 
-    List<Notification> findAll();
+    Page<NotificationResponse> findAll(Pageable pageRequest);
 }

@@ -15,8 +15,8 @@ public class FraudCheckService implements IFraudCheckService {
 
     private final FraudCheckRepository fraudCheckRepository;
 
-    public Boolean isFraudster(@NotNull Long customerId) {
-        Boolean fraudster = fraudCheckRepository.existsBycustomerIdAndIsFraudTrue(customerId);
+    public boolean isFraudster(@NotNull Long customerId) {
+        boolean fraudster = fraudCheckRepository.existsByCustomerIdAndIsFraudTrue(customerId);
 
         FraudCheckHistory entity = FraudCheckHistory.builder()
                 .customerId(customerId)

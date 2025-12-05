@@ -1,0 +1,121 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Fraud Detection Service API",
+    "description": "API for fraud detection and verification in the microservices system",
+    "contact": {
+      "name": "Microservices Team",
+      "url": "https://www.microservicesapp.com.br",
+      "email": "team@microservices.com.br"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8089",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Fraud Check",
+      "description": "API for fraud verification"
+    }
+  ],
+  "paths": {
+    "/api/v1/fraud-check/{customerId}": {
+      "get": {
+        "tags": [
+          "Fraud Check"
+        ],
+        "summary": "Check fraud",
+        "description": "Checks if a customer is potentially fraudulent",
+        "operationId": "isFraudster",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "Customer ID to be verified",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FraudCheckResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FraudCheckResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing token",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FraudCheckResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Verification completed successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FraudCheckResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FraudCheckResponse": {
+        "type": "object",
+        "properties": {
+          "isFraud": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer Authentication": {
+        "type": "http",
+        "description": "JWT auth token",
+        "name": "Bearer Authentication",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

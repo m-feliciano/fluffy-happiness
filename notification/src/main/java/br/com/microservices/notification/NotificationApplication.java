@@ -11,6 +11,7 @@ import org.springframework.context.annotation.PropertySource;
         scanBasePackages = {
                 "br.com.microservices.amqp",
                 "br.com.microservices.notification",
+                "br.com.microservices.clients.security"
         }
 )
 @EnableFeignClients(basePackages = "br.com.microservices.clients")

@@ -13,5 +13,5 @@ public interface FraudCheckRepository extends JpaRepository<FraudCheckHistory, L
 //            FROM FraudCheckHistory f
 //            WHERE f.customerId = :customerId AND f.isFraud = true""")
 //    boolean existsFraudById(@Param("customerId") Long customerId);
-    boolean existsBycustomerIdAndIsFraudTrue(Long customerId);
+    boolean existsByCustomerIdAndIsFraudTrue(Long customerId);
 }

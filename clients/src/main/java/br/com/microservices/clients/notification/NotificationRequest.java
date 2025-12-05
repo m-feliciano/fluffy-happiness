@@ -1,5 +1,6 @@
 package br.com.microservices.clients.notification;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.NonNull;
 
@@ -10,6 +11,6 @@ import java.io.Serializable;
  */
 @Builder
 public record NotificationRequest(@NonNull Long toCustomerId,
-                                  @NonNull String toCustomerEmail,
-                                  @NonNull String message) implements Serializable {
+                                  @NotBlank String toCustomerEmail,
+                                  @NotBlank String message) implements Serializable {
 }
